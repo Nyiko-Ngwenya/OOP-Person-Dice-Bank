@@ -17,8 +17,8 @@ class Dice:
             numbers = [1,2,3,4,5,6]
             numbers_after = []
             for i in range(self.sides):
-                print(numbers[i],'The actaul number ')
-                print(self.probabilities[i], 'The probability')
+                # # print(numbers[i],'The actaul number ')
+                # # print(self.probabilities[i], 'The probability')
                 if self.probabilities[i] >= 1:
                     for a in range(self.probabilities[i]):
                         numbers_after.append(numbers[i])
@@ -28,24 +28,33 @@ class Dice:
 
     def set_value(self,value):
         self.value = value
+    
     def checkNegatives(self):
         for i in self.probabilities:
                 if i <= 0:
                     print('no negatives fam')
                     raise Exception
+    
     def get_value(self):
         return self.value 
+    
     def showProb(self):
         return self.probabilities
+    
     def checkSum(self):
         sum = 0
         for i in self.probabilities:
             sum += i
         if sum < 1:
             raise Exception
+    
     def checkType(self):
         for i in self.probabilities:
             if type(i) != int:
+                pass
+    
+    def setProbabilities(self,new_probabilities):
+        self.probabilities = new_probabilities
                 
 
 dice_instance = Dice(6,[1,2,1,4,5,6])
@@ -56,3 +65,12 @@ print(dice_instance.get_value())
 # print(dice_instance.showProb())
 # dice_instance.roll()
 # print(dice_instance.get_value())
+class DiceFactory:
+    def __init__(self):
+        pass
+    def make_die(self):
+        pass
+
+factory20 = DiceFactory(20)
+die20 = factory20.make_ie()
+anotherDie20 = factory20.make_die()
