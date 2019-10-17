@@ -6,9 +6,13 @@ class Dice:
         self.sides = sides
         self.value = 0
         self.probabilities = probabilities
-        self.checkNegatives
-        self.checkSum
-        self.checkType
+        self.checkType()
+        self.checkNegatives()
+        if self.probabilities == []:
+            pass
+        else:
+            self.checkSum()
+        
         
        
     def roll(self):
@@ -31,9 +35,8 @@ class Dice:
     
     def checkNegatives(self):
         for i in self.probabilities:
-                if i <= 0:
-                    print('no negatives fam')
-                    raise Exception
+                if i < 0:
+                    raise Exception('negative probabilities not allowed')
     
     def get_value(self):
         return self.value 
@@ -45,13 +48,13 @@ class Dice:
         sum = 0
         for i in self.probabilities:
             sum += i
-        if sum < 1:
-            raise Exception
+        if sum < 0:
+            raise Exception('probability sum must be greater than 0')
     
     def checkType(self):
         for i in self.probabilities:
             if type(i) != int:
-                pass
+                raise Exception('This is not a integer')
     
     def setProbabilities(self,new_probabilities):
         self.probabilities = new_probabilities
@@ -60,11 +63,6 @@ class Dice:
         if len(self.probabilities) > 0 and len(self.probabilities) != self.sides:
             raise Exception
 
-dice_instance = Dice(6,[1,2,1,4,5,6])
-#print(dice_instance.showProb())
-dice_instance.roll()
-print(dice_instance.get_value())
-
 class DiceFactory:
     def __init__(self,num_of_sides):
         self.num_of_sides = num_of_sides
@@ -72,7 +70,3 @@ class DiceFactory:
         dice_instance = Dice(self.num_of_sides)
         return dice_instance
         
-
-factory20 = DiceFactory(20)
-die20 = factory20.make_die()
-anotherDie20 = factory20.make_die()
