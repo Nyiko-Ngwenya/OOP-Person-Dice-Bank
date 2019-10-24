@@ -1,7 +1,7 @@
 from dice import Dice
 import pytest
 
-def test_arandom_no_weight():
+def test_random_no_weight():
     dice_instance = Dice(6)
     assert dice_instance.value == 0
     dice_instance.roll()
